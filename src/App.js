@@ -4,6 +4,8 @@ import { ContactShadows, Environment, useGLTF, OrbitControls } from "drei"
 import { HexColorPicker } from "react-colorful"
 import { proxy, useProxy } from "valtio"
 
+import {Button, Card} from "react-bootstrap"
+
 import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 
 // Using a Valtio state model to bridge reactivity between
@@ -12,14 +14,9 @@ import { TextureLoader } from 'three/src/loaders/TextureLoader.js';
 const state = proxy({
   current: null,
   items: {
-    laces: "#ffffff",
-    mesh: "#ffffff",
-    caps: "#ffffff",
-    inner: "#ffffff",
-    sole: "#ffffff",
-    stripes: "#ffffff",
-    band: "#000",
-    patch: "#ffffff",
+    texture: "",
+    texture1: "",
+    texture2: ""
   },
 })
 
@@ -41,7 +38,12 @@ function Shoe(props) {
   const texture1 = useLoader(TextureLoader, "wall-3.jpg");
   const texture2 = useLoader(TextureLoader, "floor-1.jpg");
 
+  useEffect(() => {
+    const texture = useLoader(TextureLoader, state.items.texture);
+  }, [state.items.texture])
+
   return (
+    <>
     <group 
     {...props}
     ref={ref}
@@ -1708,7 +1710,7 @@ function Shoe(props) {
         position={[-17.97, -0.13, -0.04]}
         rotation={[Math.PI / 2, 0, 0]}
         scale={[0.09, 0.09, 0.09]}
-      ><meshStandardMaterial map={texture1} attach="material" />
+      ><meshStandardMaterial map={texture1} attach="material"/>
       </mesh>
       <mesh
         geometry={nodes.Würfel5_2.geometry}
@@ -2224,20 +2226,52 @@ function Shoe(props) {
       ><meshStandardMaterial map={texture} attach="material" />
       </mesh>
     </group>
+    
+    </>
   )
 }
 
 function Picker() {
-  const snap = useProxy(state)
+  useProxy(state)
+
+  const [text, setText] = useState("floor.jpg")
+
+  useEffect(() => {
+    state.items.texture = text;
+  }, [text])
+
+  // function changeStateTexture(){
+  //   let texture = new TextureLoader();
+  //   var img = new Image();
+  //   img.src = "wall-13.jpg";
+  //   texture.load(img);
+  //   console.log(texture, "img-texture")
+  //   console.log(img, "img-img")
+  //   snap.items.texture = "texture";
+  // }
+  
   return (
-    <div style={{ display: snap.current ? "block" : "none" }}>
-      <HexColorPicker className="picker" color={snap.items[snap.current]} onChange={(color) => (state.items[snap.current] = color)} />
-      <h1>{snap.current}</h1>
+    <div className="visualizer-sidebar">
+      <div className="walls">
+      <Card className="wall-texture" onClick={() => {
+         setText("floor.jpg");
+      }}>
+        <Card.Img variant="top" src={"floor.jpg"} />
+      </Card>
+      
+      <Card className="wall-texture">
+        <Card.Img variant="top" src={"floor-1.jpg"} onClick={() => {
+          setText("floor-1.jpg");
+        }} />
+      </Card>
+
+      </div>
     </div>
   )
 }
 
-export default function App() {
+export default function App(props) {
+
   return (
     <>
       <Canvas concurrent pixelRatio={[1, 1.5]} camera={{ position: [0, 0, 2.75] }}>
