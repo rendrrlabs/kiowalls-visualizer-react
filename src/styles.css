@@ -1,67 +1,26 @@
-@import url("https://rsms.me/inter/inter.css");
-
-html,
-body,
-#root {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  outline: none;
+#root,
+canvas {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
 }
-
-body {
-  background: white;
-  font-family: "Inter var", sans-serif;
-  display: flex;
-  justify-content: center;
-}
-
-#root {
-  width: 100%;
-}
-
-h1 {
-  position: absolute;
-  top: 43px;
-  left: 140px;
-  padding: 0;
-  margin: 40px;
-  font-size: 5em;
-  line-height: 0.7em;
-  letter-spacing: -6px;
-  color: #272730;
-}
-
-.picker {
-  position: absolute !important;
-  top: 74px;
-  left: 70px;
-  width: 90px !important;
-  height: 90px !important;
-}
-.visualizer-sidebar{
-  background: #fff;
+.sidebar {
   position: fixed;
+  top: 0;
   right: 10px;
-  top: 10px;
-  width: 200px;
-  height: calc(100% - 20px);
-  z-index: 10;
-  padding: 10px;
-  border-radius: 5px;
+  width: 100px;
 }
-.visualizer-sidebar .walls{
-  position: relative;
-}
-.visualizer-sidebar .walls .wall-texture{
-  height: 80px;
-  margin-bottom: 5px;
+.sidebar .img-wrapper {
+  width: 100%;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   cursor: pointer;
 }
-.visualizer-sidebar .walls .wall-texture img{
-  width: 100%;
+.sidebar .img-wrapper img {
   height: 100%;
+  width: 100%;
+}
+body{
+  margin: 0;
+  padding: 0;
 }

@@ -1,7 +1,7 @@
 {
-  "name": "floating-shoe",
+  "name": "r3f-texture-url",
   "version": "1.0.0",
-  "description": "",
+  "description": "Passing a texture url to a child component as a string inside an array.",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
@@ -14,10 +14,10 @@
     "react-scripts": "4.0.1",
     "react-three-fiber": "5.3.10",
     "three": "0.123.0",
-    "valtio": "0.4.8"
+    "valtio": "^1.0.7"
   },
   "devDependencies": {
-    "typescript": "4.1.3"
+    "typescript": "3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
